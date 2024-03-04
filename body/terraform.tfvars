@@ -9,3 +9,8 @@ vpc_name = "tp-vpc"
 dynamo_table_names = ["lighting", "heating"]
 dynamo_hash_keys = [ "id", "id" ]
 dynamo_hash_key_type = ["N", "N"]
+
+# servers
+instance_type = "t2.micro"
+public_ec2_names = [ "heating", "lighting", "status" ]
+private_ec2_names = [ "auth" ]
