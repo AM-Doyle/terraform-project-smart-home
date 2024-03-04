@@ -16,3 +16,13 @@ variable "vpc_name" {
 }
 
 
+# dynamo\
+variable "dynamo_table_names" {
+  type = list(string)
+}
+variable "dynamo_hash_keys" {
+  type = list(string)
+}
+variable "dynamo_hash_key_type" {
+  type = list(string)
+}
