@@ -8,3 +8,10 @@ module "vpc" {
   public_subnets     = var.cidr_public
   private_subnets    = var.cidr_private
 }
+
+module "security" {
+  source = "./modules/security"
+
+  vpc_id = module.vpc.vpc_id
+  cidr_block = var.cidr_range
+}
