@@ -25,3 +25,14 @@ module "dynamo" {
   hash_key = var.dynamo_hash_keys[count.index]
   hash_key_type = var.dynamo_hash_key_type[count.index]
 }
+
+module "servers" {
+  source = "./modules/servers"
+
+  instance_type = var.instance_type
+  public_subnets = module.vpc.public_subnet_ids
+  private_subnets = [module.vpc.private_subnet_ids[0]]
+  public_ec2_names = var.public_ec2_names
+  private_ec2_names = var.private_ec2_names
+  security_group_ids = module.security.security_group_ids
+}

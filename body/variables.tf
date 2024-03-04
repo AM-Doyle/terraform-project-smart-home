@@ -26,3 +26,14 @@ variable "dynamo_hash_keys" {
 variable "dynamo_hash_key_type" {
   type = list(string)
 }
+
+# servers
+variable "instance_type" {
+  type = string
+}
+variable "public_ec2_names" {
+  type = list(string)
+}
+variable "private_ec2_names" {
+  type = list(string)
+}
