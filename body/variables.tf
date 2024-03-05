@@ -37,3 +37,26 @@ variable "public_ec2_names" {
 variable "private_ec2_names" {
   type = list(string)
 }
+
+
+# load_balancer
+variable "tg_protocol" {
+  type = string
+}
+
+variable "tg_port" {
+  type = number
+}
+
+variable "tg_protocol_version" {
+  type = string
+}
+
+
+variable "lb_internal" {
+  type = bool
+}
+
+variable "load_balancer_type" {
+  type = string
+}

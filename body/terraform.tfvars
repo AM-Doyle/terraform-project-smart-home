@@ -14,3 +14,10 @@ dynamo_hash_key_type = ["N", "N"]
 instance_type = "t2.micro"
 public_ec2_names = [ "heating", "lighting", "status" ]
 private_ec2_names = [ "auth" ]
+
+# load_balancers
+tg_protocol = "HTTP"
+tg_port = "3000"
+tg_protocol_version = "HTTP1"
+lb_internal = false
+load_balancer_type = "application"

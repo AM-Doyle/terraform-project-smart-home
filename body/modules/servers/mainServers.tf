@@ -37,6 +37,7 @@ resource "aws_instance" "private_ec2s" {
   subnet_id                   = var.private_subnets[count.index]
   vpc_security_group_ids      = var.security_group_ids
   ami                         = data.aws_ami.ubuntu.id
+  associate_public_ip_address = true
   key_name = "tfIntroKey"
 
     tags = {
