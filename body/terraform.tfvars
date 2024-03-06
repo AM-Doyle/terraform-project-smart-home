@@ -14,6 +14,8 @@ dynamo_hash_key_type = ["N", "N"]
 instance_type = "t2.micro"
 public_ec2_names = [ "heating", "lighting", "status" ]
 private_ec2_names = [ "auth" ]
+customamis = [ "ami-022e3388404f71930",  "ami-0b2a2dd5fa1c618b4", "ami-0f186a5e46f0b806b", "ami-009cb50bba9849eba"]
+ec2s_needed = false
 
 # load_balancers
 tg_protocol = "HTTP"
@@ -21,3 +23,10 @@ tg_port = "3000"
 tg_protocol_version = "HTTP1"
 lb_internal = false
 load_balancer_type = "application"
+
+# autoscaling
+lt_instance_type = "t2.micro"
+key_name = "tfIntroKey"
+desired_instances = 1
+max_instances = 2
+min_instances = 1

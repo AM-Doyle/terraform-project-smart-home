@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "tp-tgs" {
 
 resource "aws_lb_target_group_attachment" "lb_attach_as_001" {
 
-    count = length(var.ec2_names)
+    count = length(var.ec2_ids)
 
   target_group_arn = aws_lb_target_group.tp-tgs[count.index].arn
   target_id        = var.ec2_ids[count.index]
