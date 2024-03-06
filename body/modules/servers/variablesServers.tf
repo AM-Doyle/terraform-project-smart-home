@@ -16,3 +16,9 @@ variable "private_ec2_names" {
 variable "security_group_ids" {
   type = list(string)
 }
+variable "customamis" {
+  type = list(string)
+}
+variable "ec2s_needed" {
+  type = bool
+}

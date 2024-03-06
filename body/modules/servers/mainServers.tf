@@ -16,12 +16,12 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "public_ec2s" {
 
-    count = length(var.public_subnets)
+    count = var.ec2s_needed ? length(var.public_subnets) : 0
 
   instance_type               = var.instance_type
   subnet_id                   = var.public_subnets[count.index]
   vpc_security_group_ids      = var.security_group_ids
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = var.customamis[count.index]
   associate_public_ip_address = true
   key_name = "tfIntroKey"
 
@@ -31,12 +31,12 @@ resource "aws_instance" "public_ec2s" {
 }
 resource "aws_instance" "private_ec2s" {
 
-    count = length(var.private_subnets)
+    count = var.ec2s_needed ? length(var.private_subnets) : 0
 
   instance_type               = var.instance_type
   subnet_id                   = var.private_subnets[count.index]
   vpc_security_group_ids      = var.security_group_ids
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = var.customamis[3]
   associate_public_ip_address = true
   key_name = "tfIntroKey"
 
