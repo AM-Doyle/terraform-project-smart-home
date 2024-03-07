@@ -9,7 +9,7 @@ resource "aws_lb_target_group" "tp-tgs" {
   vpc_id   = var.vpc_id
 
   health_check {
-    path = "/health_check"
+    path = "/health"
     protocol = var.tg_protocol
   }
 }
@@ -75,7 +75,7 @@ resource "aws_lb_listener_rule" "heating_rule" {
 
   condition {
     path_pattern {
-      values = ["/api/heating", "/api/heating/zone", "/api/heating/zone/*"]
+      values = ["/api/heating", "/api/heating/*"]
     }
   }
 }

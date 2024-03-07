@@ -24,7 +24,7 @@ resource "aws_autoscaling_group" "asgs" {
 
     count = length(var.app_names)
 
-    name = var.app_names[count.index]
+    name = "edit-${var.app_names[count.index]}"
   availability_zones = var.availability_zones[count.index]
   desired_capacity   = var.desired_instances
   max_size           = var.max_instances

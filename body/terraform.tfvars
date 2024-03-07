@@ -6,15 +6,15 @@ cidr_range = "10.0.0.0/20"
 vpc_name = "tp-vpc"
 
 #  dynamo
-dynamo_table_names = ["lighting", "heating"]
-dynamo_hash_keys = [ "id", "id" ]
-dynamo_hash_key_type = ["N", "N"]
+dynamo_table_names = ["lighting", "heating", "auth"]
+dynamo_hash_keys = [ "id", "id", "username" ]
+dynamo_hash_key_type = ["N", "N", "S"]
 
 # servers
 instance_type = "t2.micro"
 public_ec2_names = [ "heating", "lighting", "status" ]
 private_ec2_names = [ "auth" ]
-customamis = [ "ami-022e3388404f71930",  "ami-0b2a2dd5fa1c618b4", "ami-0f186a5e46f0b806b", "ami-009cb50bba9849eba"]
+customamis = [ "ami-0f31eeadbe252915c",  "ami-09ed7d276df6fff66", "ami-01c42c08d4162a827", "ami-09beaa06a8766425e"]
 ec2s_needed = false
 
 # load_balancers
