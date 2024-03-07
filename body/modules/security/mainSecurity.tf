@@ -1,5 +1,5 @@
 data "http" "myipaddr" {
-   url = "http://icanhazip.com"
+  url = "http://icanhazip.com"
 }
 
 resource "aws_security_group" "tp-sg" {

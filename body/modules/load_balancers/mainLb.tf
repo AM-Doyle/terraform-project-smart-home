@@ -1,22 +1,22 @@
 resource "aws_lb_target_group" "tp-tgs" {
 
-    count = length(var.ec2_names)
+  count = length(var.ec2_names)
 
-  name     = "tp-tg-${var.ec2_names[count.index]}"
-  protocol = var.tg_protocol
-  port     = var.tg_port
+  name             = "tp-tg-${var.ec2_names[count.index]}"
+  protocol         = var.tg_protocol
+  port             = var.tg_port
   protocol_version = var.tg_protocol_version
-  vpc_id   = var.vpc_id
+  vpc_id           = var.vpc_id
 
   health_check {
-    path = "/health"
+    path     = "/health"
     protocol = var.tg_protocol
   }
 }
 
 resource "aws_lb_target_group_attachment" "lb_attach_as_001" {
 
-    count = length(var.ec2_ids)
+  count = length(var.ec2_ids)
 
   target_group_arn = aws_lb_target_group.tp-tgs[count.index].arn
   target_id        = var.ec2_ids[count.index]
@@ -35,8 +35,8 @@ resource "aws_lb" "tp_public_load_balancer" {
 
 }
 resource "aws_lb" "tp_private_load_balancer" {
-  
-   name              = "load-balancer-private"
+
+  name               = "load-balancer-private"
   internal           = true
   load_balancer_type = var.load_balancer_type
   subnets            = var.private_subnet_ids
@@ -49,14 +49,14 @@ resource "aws_lb_listener" "lb-listener-public" {
   load_balancer_arn = aws_lb.tp_public_load_balancer.arn
   port              = "80"
   protocol          = "HTTP"
-  
+
   default_action {
-    type             = "redirect"
-    
+    type = "redirect"
+
     redirect {
-      port = "80"
-      protocol = "HTTP"
-      path = "/api/status"
+      port        = "80"
+      protocol    = "HTTP"
+      path        = "/api/status"
       status_code = "HTTP_301"
     }
   }
@@ -123,14 +123,14 @@ resource "aws_lb_listener" "lb-listener-private" {
   load_balancer_arn = aws_lb.tp_private_load_balancer.arn
   port              = "80"
   protocol          = "HTTP"
-  
+
   default_action {
-    type             = "redirect"
-    
+    type = "redirect"
+
     redirect {
-      port = "80"
-      protocol = "HTTP"
-      path = "/api/auth"
+      port        = "80"
+      protocol    = "HTTP"
+      path        = "/api/auth"
       status_code = "HTTP_301"
     }
   }

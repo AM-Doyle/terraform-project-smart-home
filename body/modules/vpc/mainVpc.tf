@@ -23,10 +23,10 @@ resource "aws_internet_gateway" "igw" {
 
 
 resource "aws_subnet" "public" {
-  count             = length(var.public_subnets)
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = var.public_subnets[count.index]
-  availability_zone = var.availability_zones[count.index]
+  count                   = length(var.public_subnets)
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnets[count.index]
+  availability_zone       = var.availability_zones[count.index]
   map_public_ip_on_launch = true
 
   tags = {
@@ -74,12 +74,12 @@ resource "aws_route" "public_internet_gateway" {
 }
 
 resource "aws_route_table" "private" {
-    count = length(var.private_subnets)
+  count = length(var.private_subnets)
 
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${var.vpc_name}-private-${count.index + 1}"
+    Name      = "${var.vpc_name}-private-${count.index + 1}"
     ManagedBy = "terraform"
   }
 }
@@ -99,16 +99,16 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = aws_subnet.public[0].id
 
-    tags = {
-      Name = "gw_NAT"
-    }
+  tags = {
+    Name = "gw_NAT"
+  }
 }
 
 resource "aws_route" "private_nat_associations" {
-    count = length(aws_route_table.private)
-    route_table_id = aws_route_table.private[count.index].id
+  count                  = length(aws_route_table.private)
+  route_table_id         = aws_route_table.private[count.index].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.nat.id
+  nat_gateway_id         = aws_nat_gateway.nat.id
 }
 
 
